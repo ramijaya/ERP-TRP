@@ -3,9 +3,19 @@ session_start();
 require_once __DIR__ . '/config/database.php';
 
 if (isset($_SESSION['user_id'])) {
-    header('Location: /ERP-TRP/');
+    header('Location: ' . (defined('BASE_URL') ? BASE_URL : '/'));
     exit;
 }
+
+// Load BASE_URL from config if available
+if (file_exists(__DIR__ . '/config/app.php')) {
+    // Only need the constant, not the session/auth stuff
+    $configContent = file_get_contents(__DIR__ . '/config/app.php');
+    if (preg_match("/define\('BASE_URL',\s*'([^']+)'\)/", $configContent, $m)) {
+        if (!defined('BASE_URL')) define('BASE_URL', $m[1]);
+    }
+}
+if (!defined('BASE_URL')) define('BASE_URL', '/');
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $db->prepare("UPDATE users SET last_login = NOW() WHERE id = ?")->execute([$user['id']]);
 
-            header('Location: /ERP-TRP/');
+            header('Location: ' . BASE_URL);
             exit;
         } else {
             $error = 'Invalid username or password';

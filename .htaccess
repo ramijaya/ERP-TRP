@@ -1,0 +1,24 @@
+# Security: Block direct access to config and database folders
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block access to config directory
+    RewriteRule ^config/ - [F,L]
+
+    # Block access to database directory (after installation, remove install.php)
+    # RewriteRule ^database/ - [F,L]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# PHP Settings (adjust as needed for hosting)
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value memory_limit 256M
+</IfModule>

@@ -2,7 +2,13 @@
 session_start();
 define('APP_NAME', 'ERP-TRP');
 define('APP_VERSION', '1.0.0');
-define('BASE_URL', '/ERP-TRP/');
+/*
+ * BASE_URL: Sesuaikan dengan lokasi instalasi
+ * - Di XAMPP lokal:  '/ERP-TRP/'
+ * - Di Hosting (root domain): '/'
+ * - Di subfolder hosting: '/subfolder/'
+ */
+define('BASE_URL', '/ERP-TRP/');  // Ganti jadi '/' saat deploy ke hosting
 
 require_once __DIR__ . '/database.php';
 

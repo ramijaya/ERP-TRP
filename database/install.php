@@ -395,7 +395,14 @@ try {
     echo "<h2 style='color:green'>&#10004; Database installed successfully!</h2>";
     echo "<p>Default admin login:</p>";
     echo "<ul><li>Username: <b>admin</b></li><li>Password: <b>admin123</b></li></ul>";
-    echo "<p><a href='" . "/ERP-TRP/" . "'>Go to ERP-TRP &rarr;</a></p>";
+    // Read BASE_URL from config
+    $configFile = __DIR__ . '/../config/app.php';
+    $baseUrl = '/';
+    if (file_exists($configFile)) {
+        $c = file_get_contents($configFile);
+        if (preg_match("/define\('BASE_URL',\s*'([^']+)'\)/", $c, $m)) $baseUrl = $m[1];
+    }
+    echo "<p><a href='" . $baseUrl . "'>Go to ERP-TRP &rarr;</a></p>";
 
 } catch (PDOException $e) {
     echo "<h2 style='color:red'>&#10008; Installation failed</h2>";

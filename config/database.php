@@ -1,8 +1,18 @@
 <?php
+/*
+ * DATABASE CONFIGURATION
+ * ----------------------
+ * Untuk XAMPP lokal: biarkan default (root, tanpa password)
+ * Untuk HOSTING: ubah sesuai info dari cPanel Domainesia
+ *   - DB_HOST: biasanya 'localhost'
+ *   - DB_NAME: nama database yang dibuat di cPanel (contoh: username_erp)
+ *   - DB_USER: user database dari cPanel (contoh: username_erp)
+ *   - DB_PASS: password database yang kamu set di cPanel
+ */
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'erp_trp');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_NAME', 'erp_trp');         // Ganti dengan nama database di cPanel
+define('DB_USER', 'root');            // Ganti dengan user database di cPanel
+define('DB_PASS', '');                // Ganti dengan password database di cPanel
 
 function getDB() {
     static $pdo = null;
